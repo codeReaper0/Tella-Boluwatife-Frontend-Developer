@@ -14,7 +14,7 @@ $token = "i_am_verified";
 // 	exit();
 // }
 
-$spacexApiUrl = "https://api.spacexdata.com/v3/capsules/{$serialNumber}";
+$spacexApiUrl = "https://api.spacexdata.com/v3/capsules/{$serial}";
 $response = file_get_contents($spacexApiUrl);
 
 if ($response === false) {

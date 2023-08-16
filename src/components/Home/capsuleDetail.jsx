@@ -2,10 +2,10 @@ import React, {Fragment, useState} from "react";
 import axios from "axios";
 import {Dialog, Transition} from "@headlessui/react";
 import {XCircleIcon} from "@heroicons/react/24/outline";
+import moment from "moment";
 
 export default function Details({serial}) {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = React.useState(false);
 
   function closeModal() {
@@ -26,7 +26,6 @@ export default function Details({serial}) {
         `/capsule-detail.php?serial=${serial}`
       );
       setData(res.data);
-      setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -92,7 +91,11 @@ export default function Details({serial}) {
                     </div>
                     <div className="flex flex-col gap-1">
                       <h4 className="font-bold text-lg">Launch Date:</h4>
-                      <p>{data.original_launch}</p>
+                      <p>
+                        {moment(data.original_launch).format(
+                          "MM-DD-YYYY hh:mmA"
+                        )}
+                      </p>
                     </div>
                     <div className="flex flex-col gap-1">
                       <h4 className="font-bold text-lg">Launch Unix:</h4>
