@@ -1,24 +1,16 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from "./pages/home/home";
 
-function App() {
-  return (
-    <div className="app">
-      <Router>
-        <Switch>
-          <Route path="/" component={Home} />
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+]);
 
-          <Redirect to="/" />
-        </Switch>
-      </Router>
-    </div>
-  );
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App;
