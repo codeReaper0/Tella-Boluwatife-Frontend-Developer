@@ -30,12 +30,19 @@ export default function Data() {
 
   useEffect(() => {
     const fetchData = async () => {
+      const token = "i_am_verified";
+
       const axiosInstance = axios.create({
         baseURL: "http://localhost/spacex",
       });
 
       try {
-        const res = await axiosInstance.get("/capsules.php");
+        const res = await axiosInstance.get("/capsules.php", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(res);
         setData(res.data);
         setLoading(false);
       } catch (error) {
@@ -75,16 +82,18 @@ export default function Data() {
   const renderData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <section className="bg-[linear-gradient(195.95deg,#202326_.7%,#191c1e_97.41%)] py-20">
+    <section className="bg-[linear-gradient(195.95deg,#202326_.7%,#191c1e_97.41%)] px-4 xl:px-0 py-10 md:py-20">
       <div className="max-w-6xl mx-auto ">
         <div className="text-white flex flex-col justify-center items-center mb-5">
-          <h1 className="text-5xl mb-4 uppercase font-bold">
-            View our Capsules
+          <h1 className="text-4xl lg:text-5xl mb-4 uppercase font-bold">
+            View Capsules
           </h1>
-          <p>Everything you need to make human double planetary</p>
+          <p className="text-center">
+            Everything you need to make human double planetary
+          </p>
         </div>
-        <div className=" text-white p-10 font-sans">
-          <form className="grid grid-cols-3 gap-8">
+        <div className=" text-white p-4 lg:p-10 font-sans">
+          <form className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <input
               onChange={(e) => handleFilterChange(e, setStatusFilter)}
               id="statusFilter"
@@ -114,7 +123,7 @@ export default function Data() {
         {loading ? (
           <CardLoaders />
         ) : (
-          <div className="grid grid-cols-2 gap-6 text-white">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-white">
             {renderData?.map((capsule) => {
               return (
                 <div

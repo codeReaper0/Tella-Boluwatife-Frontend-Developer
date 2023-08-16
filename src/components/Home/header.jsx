@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import {Logo} from "../../assets/svg/logo";
 
@@ -25,36 +25,14 @@ const navLinks = [
   },
 ];
 export default function Header() {
-  const [small, setSmall] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setSmall(window.scrollY > 500);
-    };
-
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", handleScroll);
-    }
-
-    return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
-
   return (
-    <header
-      className={`py-5 flex justify-between items-center w-full text-white z-20 max-w-7xl mx-auto ${
-        small ? "bg-black backdrop-blur-lg sticky top-0 z-20" : ""
-      }`}
-    >
+    <header className="px-4 xl:px-0 py-5 flex justify-between items-center w-full text-white z-20 max-w-7xl mx-auto ">
       <Link href="/">
         <Logo />
       </Link>
 
       <nav>
-        <ul className="flex gap-6">
+        <ul className="hidden lg:flex gap-6">
           {navLinks.map((link) => {
             return (
               <li key={link.name}>
